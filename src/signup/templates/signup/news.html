@@ -1,0 +1,60 @@
+{% extends "signup/base.html" %}
+{% load bootstrap4 %}
+{% load truncate %}
+
+{% block title %}News{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">News</li>
+        </ol>
+    </nav>
+{% endblock %}
+{% block body %}
+    <section class="header text-dark packages">
+        <div class="row news-row">
+            <div class="col-md-12">
+                <h1 class="text-center">
+                    News
+                </h1>
+            </div>
+        </div>
+
+    </section>
+    <section class="text-dark">
+        {% for news in news_items %}
+            <div class="row news-row">
+                <div class="col-md-5">
+                    <img class="img-fluid news-image" src="{{ news.image.url }}">
+                </div>
+                <div class="col-md-7">
+                    <h2>
+                        <a href="{% url 'news_item' news.pk %}">
+                            {{ news.title }}
+                        </a>
+                    </h2>
+                    <p>{{ news.body|striptags|truncatesmart:400}}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>{{ organisation.name }} has no news.</p>
+        {% endfor %}
+        <div class="pagination-block">
+            <ul class="d-flex justify-content-center">
+                {% if news_items.has_previous %}
+                    <a href="?page={{ news_items.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+                    &nbsp;{% endif %}
+                {{ news_items.page.page_range }}
+                {% for page in news_items.paginator.page_range %}
+                    <a href="?page={{ page }}"
+                       class="btn {% if news_items.number == page %}btn-primary{% else %}btn-outline-primary{% endif %}">{{ page }}</a>
+                    &nbsp;
+                {% endfor %}
+                {% if news_items.has_next %}
+                    <a href="?page={{ news_items.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
+                {% endif %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

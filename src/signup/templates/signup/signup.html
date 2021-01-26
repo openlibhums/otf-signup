@@ -1,0 +1,30 @@
+{% extends "signup/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}{{ package.name }} Sign Up{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'packages' %}">Signup for Package</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{% url 'signup_start' package.pk %}">Select a Country</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{% url 'signup_banding' package.pk country.code %}">Select a Banding</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Signup Data</li>
+        </ol>
+    </nav>
+{% endblock %}
+{% block body %}
+    <section class="header text-dark">
+        <h1>Enter Details</h1>
+        <p>To complete your signup please enter your contact details below and we will process your membership.</p>
+        <p class="lead">You are signing up for the {{ package.name }} which costs {{ banding.price }}{{ banding.currency }}.</p>
+        <form method="POST" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+            {% endbuttons %}
+        </form>
+    </section>
+{% endblock body %}

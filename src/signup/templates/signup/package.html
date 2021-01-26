@@ -1,0 +1,40 @@
+{% extends "signup/base.html" %}
+
+{% block title %}{{ package.name }}{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{% url 'packages' %}">Packages</a></li>
+            <li class="breadcrumb-item active">{{ package.name }}</li>
+        </ol>
+    </nav>
+{% endblock %}
+{% block body %}
+    <section class="bg-warning text-white header">
+        <h1 class="text-center">{{ package.name }}</h1>
+        <div class="package-card">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <img class="img-fluid img-padding" src="{{ package.image.url }}">
+                </div>
+                <div class="col-md-9">
+                    <p class="lead">{{ package.description }}</p>
+                    <br />
+                    <a href="{% url 'signup_start' package.pk %}" class="btn btn-primary float-right">Sign up for this Package >></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card package-card text-dark">
+                    <div class="card-body">
+                        {% if package.items %}{{ package.items|safe }}{% endif %}
+                        <a href="{% url 'signup_start' package.pk %}" class="btn btn-primary">Sign up for this Package</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

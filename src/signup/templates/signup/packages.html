@@ -1,0 +1,24 @@
+{% extends "signup/base.html" %}
+
+{% block title %}Packages{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Packages</li>
+        </ol>
+    </nav>
+{% endblock %}
+{% block body %}
+
+    <section class="bg-dark packages">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>All Subscription Packages</h1>
+            </div>
+            {% for package in packages %}
+                {% include "signup/elements/package_card.html" %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock body %}

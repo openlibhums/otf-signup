@@ -1,0 +1,54 @@
+{% extends "signup/base.html" %}
+
+{% block title %}{{ organisation.name }}{% endblock title %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="container for-about">
+            <h1>{{ organisation.main_page_hero_text }}</h1>
+        </div>
+    </div>
+    <section>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 card-col">
+                <div class="card h-100 text-white">
+                    <img class="card-img h-100" src="{{ organisation.hero_card_one_image.url }}" alt="Card image">
+                    <div class="card-img-overlay card-bg">
+                        <h2 class="card-title text-center">{{ organisation.hero_card_one_title }}</h2>
+                        <p class="card-text text-center">{{ organisation.hero_card_one_text|safe }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 card-col">
+                <div class="card h-100 text-white">
+                    <img class="card-img h-100" src="{{ organisation.hero_card_two_image.url }}" alt="Card image">
+                    <div class="card-img-overlay card-bg">
+                        <h2 class="card-title text-center">{{ organisation.hero_card_two_title }}</h2>
+                        <p class="card-text text-center">{{ organisation.hero_card_two_text|safe }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 card-col">
+                <div class="card h-100 text-white">
+                    <img class="card-img h-100" src="{{ organisation.hero_card_three_image.url }}" alt="Card image">
+                    <div class="card-img-overlay card-bg">
+                        <h2 class="card-title text-center">{{ organisation.hero_card_three_title }}</h2>
+                        <p class="card-text text-center">{{ organisation.hero_card_three_text|safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="bg-dark content">
+        <div class="row">
+            <div class="col-md-12 text-center header">
+                <h1>Subscription Packages</h1>
+            </div>
+            {% for package in front_page_packages %}{% include "signup/elements/package_card.html" %}{% endfor %}
+            <div class="col-md-12 text-center header">
+                <a class="btn btn-warning" href="{% url 'packages' %}">View All Packages ({{ packages.count }} total)</a>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

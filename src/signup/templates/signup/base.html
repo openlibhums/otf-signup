@@ -1,0 +1,134 @@
+{% load static %}
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock title %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom_bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tweaks.css' %}">
+    <script src="https://kit.fontawesome.com/e080d77c8d.js" crossorigin="anonymous"></script>
+    {% block css %}
+    {% endblock css %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<div class="container-fluid">
+    <!-- Image and text -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">
+            <img src="{{ organisation.image.url }}" height="58" alt="COPIM Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse w-100 flex-md-column" id="navbarNav">
+            <ul class="navbar-nav ml-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <h2 class="text-white">Opening the Future</h2>
+                </li>
+                {% if organisation.twitter_url %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ organisation.twitter_url }}">
+                        <h3 class="text-white"><i class="fab fa-twitter"></i></h3>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'page' 'contact' %}">
+                        <h3 class="text-white"><i class="far fa-envelope"></i></h3>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'page' 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'news' %}">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'packages' %}">Packages</a>
+                </li>
+                {% if organisation.display_faq %}
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'page' 'FAQ' %}">FAQ</a>
+                </li>
+                {% endif %}
+                {% if organisation.display_resources %}
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'resources' %}">Resources</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link py-1" href="{% url 'page' 'contact' %}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block breadcrumbs %}
+    {% endblock %}
+    {% block body %}
+    {% endblock body %}
+
+
+    <footer class="bg-primary text-white text-center">
+        {% block footer %}
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-4">
+                    <h3>Contact</h3>
+                    <ul class="footer-list">
+                        <li>{{ organisation.name }}</li>
+                        <li>{{ organisation.address_one }}</li>
+                        <li>{{ organisation.address_two }}</li>
+                        <li>{{ organisation.post_code }}</li>
+                        {% if organisation.phone_number %}<li>{{ organisation.phone_number }}</li>{% endif %}
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-list">
+                        <li><a href="{% url 'page' 'about' %}">About</a></li>
+                        <li><a href="{% url 'news' %}">News</a></li>
+                        <li><a href="{% url 'packages' %}">Packages</a></li>
+                        {% if organisation.display_faq %}<li><a href="{% url 'page' 'FAQ' %}">FAQ</a></li>{% endif %}
+                        {% if organisation.display_resources %}<li><a href="{% url 'resources' %}">Resources</a></li>{% endif %}
+                        <li><a href="{% url 'page' 'contact' %}">Contact</a></li>
+                        <li><a href="{% url 'page' 'privacy' %}">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-12">
+                    {{ organisation.copyright_notice|safe }}
+                </div>
+            </div>
+        {% endblock footer %}
+    </footer>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+{% if request.organisation and request.organisation.analytics_code %}
+{{ request.organisation.analytics_code|safe }}
+{% endif %}
+{% block js %}
+{% endblock js %}
+
+</html>

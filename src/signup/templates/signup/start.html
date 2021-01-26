@@ -1,0 +1,29 @@
+{% extends "signup/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}Packages{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'packages' %}">Signup for Package</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Select a Country</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <section class="header text-dark">
+        <h1>Select Country</h1>
+        <p>In order that we can get pricing specific to you please select your institution's country from the list
+            below.</p>
+        <form method="POST" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+            {% endbuttons %}
+        </form>
+    </section>
+{% endblock %}

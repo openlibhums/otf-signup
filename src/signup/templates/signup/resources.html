@@ -1,0 +1,32 @@
+{% extends "signup/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}Resources{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Resources</li>
+        </ol>
+    </nav>
+{% endblock %}
+{% block body %}
+    <section class="bg-dark packages">
+        <h1 class="text-center">
+            Resources
+        </h1>
+        {{ organisation.resources|safe }}
+
+        <ul>
+        {% for resource in organisation.resource_set.all %}
+            <li>
+                <a href="{{ resource.file.url }}">
+                    {{ resource.title }}
+                </a>
+            </li>
+        {% empty %}
+            <li>There are no resources to display.</li>
+        {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

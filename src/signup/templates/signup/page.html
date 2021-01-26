@@ -1,0 +1,26 @@
+{% extends "signup/base.html" %}
+
+{% block title %}{{ organisation.name }} {{ page_name|capfirst }}{% endblock title %}
+
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ page_name|capfirst }}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block body %}
+
+    <section class="bg-dark packages">
+        <h1 class="text-center">
+            {{ page_name|capfirst }}
+        </h1>
+        {% if page_name == 'contact' %}
+            {% include "signup/elements/contact.html" %}
+        {% else %}
+            {{ content|safe }}
+        {% endif %}
+    </section>
+{% endblock %}

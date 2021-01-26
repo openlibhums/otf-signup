@@ -1,0 +1,53 @@
+{% extends "signup/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}Select a Banding{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'packages' %}">Signup for Package</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{% url 'signup_start' package.pk %}">Select a Country</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Select a Banding</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <section class="header text-dark">
+        <h1>Select a Banding</h1>
+        <p>Bandings for {{ country.name }} ({{ country.code }}) are displayed below.</p>
+        <form method="POST" class="form">
+            {% csrf_token %}
+            {% bootstrap_form_errors form %}
+            <table class="table table-hover table-bordered text-dark">
+                <tr>
+                    <th>Select</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                </tr>
+                {% for banding in bandings %}
+                <tr>
+                    <td>
+                        <input name="banding" type="radio" value="{{ banding.pk }}">
+                    </td>
+                    <td>
+                        {{ banding.name }}
+                    </td>
+                    <td>
+                        {{ banding.price }}
+                    </td>
+                    <td>
+                        {{ banding.currency }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    Select Banding
+                </button>
+            {% endbuttons %}
+        </form>
+    </section>
+{% endblock %}

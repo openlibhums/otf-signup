@@ -1,0 +1,37 @@
+{% extends "signup/base.html" %}
+{% load bootstrap4 %}
+{% load truncate %}
+
+{% block title %}News{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'news' %}">News</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ news_item.title }}</li>
+        </ol>
+    </nav>
+{% endblock %}
+{% block body %}
+    <section class="header text-dark packages">
+        <div class="row news-row">
+            <div class="col-md-12">
+                <h1 class="text-center">
+                    {{ news_item.title }}
+                </h1>
+            </div>
+        </div>
+
+    </section>
+    <section class="text-dark">
+            <div class="row news-row">
+                <div class="col-md-5">
+                    <img class="img-fluid news-image" src="{{ news_item.image.url }}">
+                    <p class="lead">Posted by {{ news_item.posted_by.first_name }} {{ news_item.posted_by.last_name }} on {{ news_item.posted.date }} at {{ news_item.posted|date:"Hi"}}</p>
+                </div>
+                <div class="col-md-7">
+                    <p>{{ news_item.body|safe}}</p>
+                </div>
+            </div>
+    </section>
+{% endblock %}

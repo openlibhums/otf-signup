@@ -1,0 +1,12 @@
+<ul class="footer-list">
+    <li>Address:</li>
+    <li>{{ organisation.name }}</li>
+    <li>{{ organisation.address_one }}</li>
+    <li>{{ organisation.address_two }}</li>
+    <li>{{ organisation.post_code }}</li>
+<br />
+    {% if organisation.phone_number %}
+        <li>Telephone: {{ organisation.phone_number }}</li>
+    {% endif %}
+    <li>Email: {{ organisation.contact_email }}</li>
+</ul>

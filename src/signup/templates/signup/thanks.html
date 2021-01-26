@@ -1,0 +1,18 @@
+{% extends "signup/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}Sign Up Thanks{% endblock title %}
+{% block breadcrumbs %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'packages' %}">Signup for Package</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Signup Complete</li>
+        </ol>
+    </nav>
+{% endblock %}
+{% block body %}
+    <section class="header text-dark">
+        <h1>Sign Up Complete</h1>
+        <p>Thanks for signing up. Someone will be in touch soon.</p>
+    </section>
+{% endblock body %}

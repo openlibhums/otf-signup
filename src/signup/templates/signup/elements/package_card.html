@@ -1,0 +1,10 @@
+<div class="col-lg-3 col-md-6 card-col">
+    <div class="card text-dark h-100">
+        <img class="card-img-top" src="{{ package.image.url }}" alt="Card image cap">
+        <div class="card-body d-flex flex-column h-100">
+            <h5 class="card-title text-center">{{ package.name }}</h5>
+            <p class="card-text">{{ package.description|truncatechars:200 }}</p>
+            <a href="{% url 'package' package.pk %}" class="btn mt-auto btn-warning">View More Information</a>
+        </div>
+    </div>
+</div>
